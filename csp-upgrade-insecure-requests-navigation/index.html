@@ -1,0 +1,37 @@
+---
+feature_name: Upgrade Insecure Requests Navigation
+chrome_version: n/a
+additional_head_content: <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+---
+
+<h3>Background</h3>
+<p>
+  The "<a href="https://w3c.github.io/webappsec/specs/upgrade/">Upgrade Insecure Requests</a>"
+  <a href="http://www.html5rocks.com/en/tutorials/security/content-security-policy/">Content Security Policy</a>
+  can be used to automatically <a href="https://w3c.github.io/webappsec-upgrade-insecure-requests/#example-navigation">upgrade all navigation</a> requests to link to the secure version of the page.
+</p>
+<p>
+  In practice, this is helpful as sites work to implement full <code>https</code> support, but are not ready to deliver with <a href="https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security">Strict Transport Security</a> headers yet. This will keep users who have already accessed the site securely to remain on the secure sites where applicable.
+</p>
+<p>
+  Like other Content Security Policies, the recommend approach is to enable it via a HTTP
+  response header, <code>Content-Security-Policy: upgrade-insecure-requests</code>. However,
+  if you do not have control over the underlying web server (as is the case in this demo), an
+  <a href="http://www.html5rocks.com/en/tutorials/security/content-security-policy/#the-meta-tag">alternative</a>
+  is to include the
+  <code>&lt;meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"&gt;</code>
+  tag in your HTML's <code>&lt;head&gt;</code>.
+</p>
+<div class="output">
+  <p>
+    The following link explicitly links using <code>http:</code>, URL, <code>http://iamcarrico.github.io/samples/csp-upgrade-insecure-requests-navigation/</code>
+    Because this page has <code>Content-Security-Policy: upgrade-insecure-requests</code>
+    active, the <code>http:</code> is treated as <code>https:</code>, and the user is kept on the secure page.
+  </p>
+  <p>
+    <a href="http://iamcarrico.github.io/samples/csp-upgrade-insecure-requests-navigation/">Insecure link</a>
+  </p>
+  <p>
+    Note: This will only work when the entire domain name (including subdomain) are the same on the page that loaded the link, and the link itself.
+  </p>
+</div>
